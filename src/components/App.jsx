@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
-import { React } from "react";
-import { useState } from "react";
-import Section from "./Section/Section";
-import Statistics from "./Statistics/Statistics";
-import FeedbackOptions from "./FeedbackOptions/FeedbackOptions";
-import Notification from "./Notification/Notification";
+import { React } from 'react';
+import { useState } from 'react';
+import Section from './Section/Section';
+import Statistics from './Statistics/Statistics';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import Notification from './Notification/Notification';
 
 export default function App() {
   const [good, setGood] = useState(0);
@@ -27,15 +27,15 @@ export default function App() {
   function onLeaveFeedback(e) {
     const name = e.target.name;
     switch (name) {
-      case "good":
+      case 'good':
         setGood(good + 1);
         break;
 
-      case "neutral":
+      case 'neutral':
         setNeutral(neutral + 1);
         break;
 
-      case "bad":
+      case 'bad':
         setBad(bad + 1);
         break;
 
@@ -44,14 +44,16 @@ export default function App() {
     }
   }
 
-  const objKey = ["good", "neutral", "bad"];
   const total = countTotalFeedback();
   const positivePercentage = countPositiveFeedbackPercentage();
 
   return (
     <>
       <Section title="Please leave feedback">
-        <FeedbackOptions options={objKey} onLeaveFeedback={onLeaveFeedback} />
+        <FeedbackOptions
+          options={Object.keys({ good, neutral, bad })}
+          onLeaveFeedback={onLeaveFeedback}
+        />
       </Section>
       {total === 0 ? (
         <Notification message="No feedback given" />
